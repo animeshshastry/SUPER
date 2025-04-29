@@ -1,0 +1,42 @@
+FROM ros:humble-perception
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y locales xvfb python3 python3-pip python3-rosdep python3-colcon-common-extensions python3-colcon-core ros-humble-desktop
+ 
+RUN apt install -y nano git
+# for MARSIM example
+RUN apt-get install -y libglfw3-dev libglew-dev libncurses5-dev libncursesw5-dev
+# Eigen [version testd: 3.3.7-2] and soft link 
+RUN apt-get install -y libeigen3-dev       
+RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
+# dw for backward cpp
+RUN apt-get install -y libdw-dev
+# for ROS dependency
+RUN apt-get install -y ros-humble-mavros* ros-humble-pcl*
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /etc/bash.bashrc
+# RUN echo "source /opt/ros_cuda/install/setup.bash" >> /etc/bash.bashrc
+RUN echo "source $ROS2_WS/install/setup.bash" >> /etc/bash.bashrc
+# RUN echo "alias prebuild='rosdep install --from-paths src --ignore-src -y --skip-keys '${skip_keys}''" >> /etc/bash.bashrc
+RUN echo "alias build='colcon build --symlink-install && source install/setup.bash'" >> /etc/bash.bashrc
+RUN echo "alias start='source install/setup.bash && ros2 launch multiagent_launcher multiagent.launch.py'" >> /etc/bash.bashrc
+RUN echo "echo -e \"Run 'build' to build and 'start' to launch the multiagent nodes.\"" >> /etc/bash.bashrc
+
+# Create a user (example: phoenix) with a home directory
+ARG USERNAME=super
+ARG USER_UID=1001
+ARG USER_GID=1001
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+
+# Set permissions for the user
+WORKDIR /home/$USERNAME
+USER $USERNAME
+
+# Set the entrypoint
+ENTRYPOINT ["/bin/bash"]
+
