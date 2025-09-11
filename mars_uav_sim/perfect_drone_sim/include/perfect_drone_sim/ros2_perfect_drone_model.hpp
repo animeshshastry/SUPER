@@ -11,7 +11,7 @@
 #include "nav_msgs/msg/path.hpp"
 #include <sensor_msgs/msg/point_cloud2.hpp>
 #include <marsim_render/marsim_render.hpp>
-#include "pcl_conversions/pcl_conversions.h"
+#include <pcl_conversions/pcl_conversions.h>
 #include "perfect_drone_sim/config.hpp"
 #include "tf2_ros/transform_broadcaster.h"
 
@@ -62,6 +62,7 @@ namespace perfect_drone {
                                           .best_effort()
                                           .keep_last(100)
                                           .durability_volatile());
+            // const rclcpp::QoS qos(rclcpp::QoS(100).reliable().keep_last(100).durability_volatile());
 
 #define CONFIG_FILE_DIR(name) (std::string(std::string(ROOT_DIR) + "config/"+(name)))
             std::string dft_cfg_path = CONFIG_FILE_DIR("lidar_sim.yaml");
@@ -105,9 +106,9 @@ namespace perfect_drone {
             path_pub_ = this->create_publisher<nav_msgs::msg::Path>("path", qos);
 
             // 发布 PointCloud2 消息
-            local_pc_pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("/cloud_registered", qos);
+            local_pc_pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("/cloud_registered", 1);
 
-            global_pc_pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("/global_pc", qos);
+            global_pc_pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("/global_pc", 1);
 
 
             position_ = cfg_.init_pos;
