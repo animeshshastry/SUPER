@@ -3,16 +3,24 @@ FROM osrf/ros:humble-desktop-full
 
 # Install OpenCV (C++ libs + Python bindings)
 RUN apt-get update && apt-get install -y \
-    libopencv-dev python3-opencv libglfw3-dev libglew-dev libncurses5-dev libncursesw5-dev libdw-dev ros-humble-mavros* ros-humble-pcl*\
+    gedit libopencv-dev python3-opencv libglfw3-dev libglew-dev libncurses5-dev libncursesw5-dev libdw-dev ros-humble-mavros* ros-humble-pcl* ros-humble-rmw-zenoh-cpp\
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get install -y libeigen3-dev  \     
     && ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
 
 # Source ROS setup automatically
-SHELL ["/bin/bash", "-c"]
-RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
-RUN echo "bash /home/phoenix/src/scripts/select_ros_version.sh ROS2" >> ~/.bashrc
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /etc/bash.bashrc
+RUN echo "source /home/phoenix/install/setup.bash" >> /etc/bash.bashrc
+RUN echo "export RMW_IMPLEMENTATION=rmw_zenoh_cpp" >> /etc/bash.bashrc
+RUN echo "alias zenohd='ros2 run rmw_zenoh_cpp rmw_zenohd'" >> /etc/bash.bashrc
+RUN echo "alias start='source install/setup.bash && ros2 launch mission_planner click_demo.launch.py'" >> /etc/bash.bashrc
+RUN echo "alias build='colcon build --symlink-install --packages-select mars_quadrotor_msgs && source install/setup.bash && colcon build --symlink-install'" >> /etc/bash.bashrc
+
+RUN echo "bash /home/phoenix/src/SUPER/scripts/select_ros_version.sh ROS2" >> /etc/bash.bashrc
+RUN echo "echo -e \"Run 'build' to build ROS2 ws, and 'start' to launch the ROS2 point click demo.\"" >> /etc/bash.bashrc
+
 
 # Create a user (example: phoenix) with a home directory
 ARG USERNAME=phoenix

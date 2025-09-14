@@ -36,6 +36,7 @@ find_package(tf2_ros REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(PCL REQUIRED)
 find_package(pcl_conversions REQUIRED)
+find_package(pcl_ros REQUIRED)
 find_package(OpenCV REQUIRED)
 
 
@@ -65,6 +66,7 @@ set(dependencies
         visualization_msgs
         tf2_ros
         pcl_conversions
+        pcl_ros
 )
 
 add_executable(perfect_drone_node
