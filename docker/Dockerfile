@@ -16,9 +16,9 @@ RUN echo "source /home/phoenix/install/setup.bash" >> /etc/bash.bashrc
 RUN echo "export RMW_IMPLEMENTATION=rmw_zenoh_cpp" >> /etc/bash.bashrc
 RUN echo "alias zenohd='ros2 run rmw_zenoh_cpp rmw_zenohd'" >> /etc/bash.bashrc
 RUN echo "alias start='source install/setup.bash && ros2 launch mission_planner click_demo.launch.py'" >> /etc/bash.bashrc
-RUN echo "alias build='colcon build --symlink-install --packages-select mars_quadrotor_msgs && source install/setup.bash && colcon build --symlink-install'" >> /etc/bash.bashrc
+RUN echo "alias build='colcon build --symlink-install && source install/setup.bash'" >> /etc/bash.bashrc
 
-RUN echo "bash /home/phoenix/src/SUPER/scripts/select_ros_version.sh ROS2" >> /etc/bash.bashrc
+# RUN echo "bash /home/phoenix/src/SUPER/scripts/select_ros_version.sh ROS2" >> /etc/bash.bashrc
 RUN echo "echo -e \"Run 'build' to build ROS2 ws, and 'start' to launch the ROS2 point click demo.\"" >> /etc/bash.bashrc
 
 
