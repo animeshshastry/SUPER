@@ -7,7 +7,7 @@ fsm:
   cmd_topic: "/planning/pos_cmd"
   mpc_cmd_topic: "/planning_cmd/poly_traj"
   timer_en: true
-  world_frame: "world"
+  world_frame: "/quadrotor1/odom"
 
 super_planner:
   backup_traj_en: true
@@ -137,8 +137,8 @@ rog_map:
   #  else user should call function [updateMap] to update the map.
   ros_callback:
     enable: true
-    cloud_topic: "/cloud_registered"
-    odom_topic: "/lidar_slam/odom"
+    cloud_topic: "/quadrotor1/depth_anthing/depth/pointcloud"
+    odom_topic: "/quadrotor1/synced_odom"
     odom_timeout: 2.0
 
 
@@ -152,7 +152,7 @@ rog_map:
     frame_rate: 0
     # visualization range along the odom [m].
     range: [ 15, 15,4 ]
-    frame_id: "world" # The frame id of the map.
+    frame_id: "quadrotor1/odom" # The frame id of the map.
     publish_transform: false # whether to publish the transform between map and odom
     pub_unknown_map_en: false
 

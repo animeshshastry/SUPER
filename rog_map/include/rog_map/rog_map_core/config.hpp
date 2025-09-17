@@ -123,6 +123,7 @@ namespace rog_map {
             loader.LoadParam(name_space + "/visualization/use_dynamic_reconfigure", use_dynamic_reconfigure, false);
             loader.LoadParam(name_space + "/visualization/pub_unknown_map_en", pub_unknown_map_en, false);
             loader.LoadParam(name_space + "/visualization/frame_id", frame_id, string("world"));
+            loader.LoadParam(name_space + "/visualization/publish_transform", publish_transform, true);
             loader.LoadParam(name_space + "/visualization/time_rate", viz_time_rate, 0.0);
             loader.LoadParam(name_space + "/visualization/frame_rate", viz_frame_rate, 0);
             vector<double> temp_vis_range;
@@ -311,7 +312,7 @@ namespace rog_map {
         int inf_virtual_ceil_height_id_g{}, inf_virtual_ground_height_id_g{};
 
         bool visualization_en{false}, frontier_extraction_en{false},
-                raycasting_en{true}, ros_callback_en{false}, pub_unknown_map_en{false};
+                raycasting_en{true}, ros_callback_en{false}, pub_unknown_map_en{false}, publish_transform{true};
 
         /* Spherical neighbor for inflation*/
         std::vector<Vec3i> inf_spherical_neighbor{};

@@ -54,10 +54,15 @@ namespace ros_interface {
     using PositionCommandPubPtr = rclcpp::Publisher<mars_quadrotor_msgs::msg::PositionCommand>::SharedPtr;
     using PolynomialTrajectoryPubPtr = rclcpp::Publisher<mars_quadrotor_msgs::msg::PolynomialTrajectory>::SharedPtr;
 
-    const std::string DEFAULT_FRAME_ID = "world";
+    std::string DEFAULT_FRAME_ID;
 
     class Ros1Adapter {
     public:
+
+        static void setDefaultFrameId(const std::string &frame_id) {
+            DEFAULT_FRAME_ID = frame_id;
+        }
+
         /* For visualization ============================================================*/
         static void deleteAllMarkerArray(const MarkerArrayPubPtr &pub_) {
             visualization_msgs::msg::Marker del;
@@ -531,7 +536,7 @@ namespace ros_interface {
                     static int cnt = 0;
                     // publish lines
                     visualization_msgs::msg::Marker line_list;
-                    line_list.header.frame_id = "world";
+                    line_list.header.frame_id = DEFAULT_FRAME_ID;
                     line_list.header.stamp = sim_clock->now();
                     line_list.ns = ns;
                     line_list.id = cnt++;
@@ -589,7 +594,7 @@ namespace ros_interface {
             int id = 0;
             visualization_msgs::msg::Marker line_strip;
             line_strip.header.stamp = sim_clock->now();
-            line_strip.header.frame_id = "world";
+            line_strip.header.frame_id = DEFAULT_FRAME_ID;
             line_strip.action = visualization_msgs::msg::Marker::ADD;
             line_strip.ns = ns;
             line_strip.pose.orientation.w = 1.0;
@@ -656,7 +661,7 @@ namespace ros_interface {
             if (std::isnan(pt.x()) || std::isnan(pt.y()) || std::isnan(pt.z())) {
                 return;
             }
-            marker_ball.header.frame_id = "world";
+            marker_ball.header.frame_id = DEFAULT_FRAME_ID;
             marker_ball.header.stamp = sim_clock->now();
             marker_ball.ns = ns.c_str();
             marker_ball.id = id >= 0 ? id : cnt++;
@@ -691,7 +696,7 @@ namespace ros_interface {
             static int id = 0;
             mkr.id = id++;
             mkr.type = visualization_msgs::msg::Marker::SPHERE;
-            mkr.header.frame_id = "world";
+            mkr.header.frame_id = DEFAULT_FRAME_ID;
             mkr.header.stamp = sim_clock->now();
             mkr.ns = ns;
             mkr.id = id++;
@@ -721,7 +726,7 @@ namespace ros_interface {
             auto sim_clock = std::make_shared<rclcpp::Clock>(RCL_ROS_TIME);
             /* Publish point */
             visualization_msgs::msg::Marker point;
-            point.header.frame_id = "world";
+            point.header.frame_id = DEFAULT_FRAME_ID;
             point.header.stamp = sim_clock->now();
             point.ns = ns.c_str();
             point.id = point_id++;
@@ -751,7 +756,7 @@ namespace ros_interface {
 
             // publish lines
             visualization_msgs::msg::Marker line_list;
-            line_list.header.frame_id = "world";
+            line_list.header.frame_id = DEFAULT_FRAME_ID;
             line_list.header.stamp = sim_clock->now();
             line_list.ns = ns + "line";
             line_list.id = line_cnt++;

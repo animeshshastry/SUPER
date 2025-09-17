@@ -47,7 +47,7 @@ namespace fsm {
         double click_height{};
 
         bool click_yaw_en{};
-        string cmd_topic, mpc_cmd_topic, click_goal_topic;
+        string cmd_topic, mpc_cmd_topic, click_goal_topic, world_frame;
         double yaw_dot_max{};
 
         Config() = default;
@@ -63,7 +63,7 @@ namespace fsm {
             loader.LoadParam("fsm/cmd_topic", cmd_topic, string("/planning/pos_cmd"));
             loader.LoadParam("fsm/mpc_cmd_topic", mpc_cmd_topic, string("/planning_cmd/mpc"));
             loader.LoadParam("fsm/click_goal_topic", click_goal_topic, string("/planning/click_goal_topic"));
-
+            loader.LoadParam("fsm/world_frame", world_frame, string("world"));
 
             loader.LoadParam("super_planner/yaw_dot_max", yaw_dot_max, 1.0, true);
             loader.LoadParam("super_planner/visualization_en", visualization_en, false, true);

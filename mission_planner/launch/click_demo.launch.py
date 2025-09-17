@@ -18,42 +18,42 @@ def generate_launch_description():
     # default_rviz_fpv_config_path = os.path.join(
     #     package_path, 'rviz2', 'fpv.rviz')
 
-    default_config_path = 'waypoint.yaml'
-    default_data_path =  'benchmark.txt'
+    # default_config_path = 'waypoint.yaml'
+    # default_data_path =  'benchmark.txt'
 
     perfect_drone_sim_config_name = 'click.yaml'
     super_config_name = 'click_smooth_ros2.yaml'
 
 
-    declare_use_sim_time_cmd = DeclareLaunchArgument(
-        'use_sim_time', default_value='false',
-        description='Use simulation (Gazebo) clock if true'
-    )
-    declare_config_path_cmd = DeclareLaunchArgument(
-        'config_name', default_value=default_config_path,
-        description='Yaml config file path'
-    )
-    declare_data_path_cmd = DeclareLaunchArgument(
-        'data_name', default_value=default_data_path,
-        description='Yaml config file path'
-    )
+    # declare_use_sim_time_cmd = DeclareLaunchArgument(
+    #     'use_sim_time', default_value='false',
+    #     description='Use simulation (Gazebo) clock if true'
+    # )
+    # declare_config_path_cmd = DeclareLaunchArgument(
+    #     'config_name', default_value=default_config_path,
+    #     description='Yaml config file path'
+    # )
+    # declare_data_path_cmd = DeclareLaunchArgument(
+    #     'data_name', default_value=default_data_path,
+    #     description='Yaml config file path'
+    # )
 
-    perfect_drone_sim_config_name_cmd = DeclareLaunchArgument(
-        'config_name', default_value=perfect_drone_sim_config_name,
-        description='Yaml config file path'
-    )
+    # perfect_drone_sim_config_name_cmd = DeclareLaunchArgument(
+    #     'config_name', default_value=perfect_drone_sim_config_name,
+    #     description='Yaml config file path'
+    # )
 
-    super_config_name_cmd = DeclareLaunchArgument(
-        'config_name', default_value=super_config_name,
-        description='Yaml config file path'
-    )
+    # super_config_name_cmd = DeclareLaunchArgument(
+    #     'config_name', default_value=super_config_name,
+    #     description='Yaml config file path'
+    # )
 
 
 
     ld = LaunchDescription()
-    ld.add_action(declare_use_sim_time_cmd)
-    ld.add_action(declare_config_path_cmd)
-    ld.add_action(declare_data_path_cmd)
+    # ld.add_action(declare_use_sim_time_cmd)
+    # ld.add_action(declare_config_path_cmd)
+    # ld.add_action(declare_data_path_cmd)
 
 
     rviz_node = Node(

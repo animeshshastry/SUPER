@@ -34,8 +34,12 @@ namespace ros_interface {
     class Ros2Interface : public RosInterface {
     public:
 
-        explicit Ros2Interface(const rclcpp::Node::SharedPtr nh)
-                : nh_(nh) {
+        string world_frame;
+        explicit Ros2Interface(const rclcpp::Node::SharedPtr nh, const std::string &frame_id) : nh_(nh) {
+            
+            world_frame = frame_id;
+            Ros1Adapter::setDefaultFrameId(frame_id);
+
             const rclcpp::QoS qos(rclcpp::QoS(100)
                                           .best_effort()
                                           .keep_last(100)
@@ -351,7 +355,7 @@ namespace ros_interface {
             }
             sensor_msgs::msg::PointCloud2 pc2;
             pcl::toROSMsg(pc, pc2);
-            pc2.header.frame_id = "world";
+            pc2.header.frame_id = world_frame;
             getSimTime(pc2.header.stamp.sec, pc2.header.stamp.nanosec);
             replan_log_pc_pub_->publish(pc2);
 
