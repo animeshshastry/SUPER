@@ -19,15 +19,15 @@ super_planner:
   frontend_in_known_free: false
   goal_yaw_en: false
   goal_vel_en: false
-  corridor_bound_dis: 0.8
-  corridor_line_max_length: 1.0
-  safe_corridor_line_max_length: 6.0
+  corridor_bound_dis: 1.0
+  corridor_line_max_length: 1.2
+  safe_corridor_line_max_length: 5.0
   iris_iter_num: 2
   obs_skip_num: 2
   replan_forward_dt: 0.1
   planning_horizon: 7.0
   sensing_horizon: -1
-  receding_dis: 1.0
+  receding_dis: 4.0
   robot_r: 0.2
   yaw_dot_max: 3.0
   # Yaw mode: 1 heading to velocity, 2 heading to goal
@@ -106,19 +106,19 @@ astar:
 
 
 rog_map:
-  resolution: 0.05
-  inflation_resolution: 0.1
-  inflation_step: 3
+  resolution: 0.5
+  inflation_resolution: 0.5
+  inflation_step: 1
   unk_inflation_en: false
   unk_inflation_step: 1
-  map_size: [ 50,50,6 ]
+  map_size: [ 100,100,10 ]
   # If the map rolling is disable, the map origin [m] should be set.
   fix_map_origin: [ 0,0,1.5 ]
   frontier_extraction_en: false
 
   # Virtual ceil and ground
-  virtual_ceil_height: 13.5
-  virtual_ground_height: -0.1
+  virtual_ceil_height: 130.5
+  virtual_ground_height: -50.1
 
   load_pcd_en: false
 
@@ -131,13 +131,13 @@ rog_map:
     enable: false
     resolution: 0.1
     # The range of esdf around the odom [m].
-    local_update_box: [ 5,5,3 ]
+    local_update_box: [ 50,50,30 ]
 
   # If [enable = true], the ROG-Map will actively take ros topic as input.
   #  else user should call function [updateMap] to update the map.
   ros_callback:
     enable: true
-    cloud_topic: "/quadrotor1/depth_anthing/depth/pointcloud"
+    cloud_topic: "/quadrotor1/depth_anthing/pointcloud_registered"
     odom_topic: "/quadrotor1/synced_odom"
     odom_timeout: 2.0
 
@@ -151,7 +151,7 @@ rog_map:
     # The frame rate of visualization [Hz], if set to 0, the visualization will not be triggered by frame.
     frame_rate: 0
     # visualization range along the odom [m].
-    range: [ 15, 15,4 ]
+    range: [ 50, 50, 14 ]
     frame_id: "quadrotor1/odom" # The frame id of the map.
     publish_transform: false # whether to publish the transform between map and odom
     pub_unknown_map_en: false
@@ -167,7 +167,7 @@ rog_map:
   raycasting:
     # if disable, the map will only maintain occupied information, and all other grid
     # will be considered as unknown.
-    enable: false
+    enable: true
     batch_update_size: 1
     local_update_box: [ 100,100,5 ]
     # The range of raycasting [m].
