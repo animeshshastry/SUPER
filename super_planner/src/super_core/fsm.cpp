@@ -66,9 +66,9 @@ namespace fsm {
         TimeConsuming replan_once_time("replan_once_time", false);
 
         RET_CODE ret_code = planner_ptr_->ReplanOnce(gi_.goal_p, gi_.goal_yaw, gi_.new_goal);
-        if (ret_code == FAILED) {
-//            cout << YELLOW << " -- [Fsm] ReplanOnce failed." << RESET << endl;
-        } else { cout << GREEN << " -- [Fsm] ReplanOnce succeed." << RESET << endl; }
+        
+        if (ret_code == FAILED) { cout << YELLOW << " -- [Fsm] ReplanOnce failed." << RESET << endl;}
+        else { cout << GREEN << " -- [Fsm] ReplanOnce succeed." << RESET << endl; }
 
         if (ret_code == EMER) {
             ChangeState("ReplanTimerCallback", EMER_STOP);

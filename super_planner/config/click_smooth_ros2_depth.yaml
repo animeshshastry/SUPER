@@ -1,7 +1,7 @@
 fsm:
   click_goal_en: true
   click_goal_topic: "/goal_pose"
-  click_height: 1.5
+  click_height: 5.0
   click_yaw_en: false
   replan_rate: 5.0
   cmd_topic: "/planning/pos_cmd"
@@ -13,21 +13,21 @@ super_planner:
   backup_traj_en: true
   detailed_log_en: false
   visualization_en: true
-  use_fov_cut: false
+  use_fov_cut: true
   print_log: false
   visual_process: false
   frontend_in_known_free: false
   goal_yaw_en: false
   goal_vel_en: false
   corridor_bound_dis: 1.0
-  corridor_line_max_length: 1.2
-  safe_corridor_line_max_length: 5.0
+  corridor_line_max_length: 5.2
+  safe_corridor_line_max_length: 10.0
   iris_iter_num: 2
   obs_skip_num: 2
   replan_forward_dt: 0.1
   planning_horizon: 7.0
   sensing_horizon: -1
-  receding_dis: 4.0
+  receding_dis: 5.0
   robot_r: 0.2
   yaw_dot_max: 3.0
   # Yaw mode: 1 heading to velocity, 2 heading to goal
@@ -106,8 +106,8 @@ astar:
 
 
 rog_map:
-  resolution: 0.5
-  inflation_resolution: 0.5
+  resolution: 0.3
+  inflation_resolution: 0.3
   inflation_step: 1
   unk_inflation_en: false
   unk_inflation_step: 1

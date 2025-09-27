@@ -74,7 +74,6 @@ set(ros_libs
         rog_map
         tf2_ros
         pcl_conversions
-
 )
 
 include_directories(
@@ -106,11 +105,24 @@ ament_target_dependencies(fsm_node PUBLIC
         ${ros_libs}
 )
 
+#=================FOR Robot control Node ============================#
+add_executable(uav_controller_node
+        Apps/uav_controller_node.cpp
+)
+target_link_libraries(uav_controller_node PUBLIC
+        super
+        ${third_party_libs}
+)
+ament_target_dependencies(uav_controller_node PUBLIC
+        ${ros_libs}
+)
+
 #=================INSTALL all targets ============================#
 
 install(
         TARGETS
         fsm_node
+        uav_controller_node
         RUNTIME DESTINATION lib/${PROJECT_NAME}
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib

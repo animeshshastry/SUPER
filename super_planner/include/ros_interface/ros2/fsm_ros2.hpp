@@ -37,7 +37,9 @@
 #include "nav_msgs/msg/odometry.hpp"
 #include "mars_quadrotor_msgs/msg/position_command.hpp"
 #include "mars_quadrotor_msgs/msg/polynomial_trajectory.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 
+#include <Eigen/Dense>
 
 namespace fsm {
     class FsmRos2 : public Fsm {
@@ -296,8 +298,7 @@ namespace fsm {
             ros_ptr_ = std::make_shared<ros_interface::Ros2Interface>(nh_, cfg_.world_frame);
             planner_ptr_ = std::make_shared<SuperPlanner>(cfg_path, ros_ptr_, map_ptr_);
             cmd_pub_ = nh_->create_publisher<mars_quadrotor_msgs::msg::PositionCommand>(cfg_.cmd_topic, qos);
-            mpc_cmd_pub_ = nh_->create_publisher<mars_quadrotor_msgs::msg::PolynomialTrajectory>(cfg_.mpc_cmd_topic,
-                                                                                                 qos);
+            mpc_cmd_pub_ = nh_->create_publisher<mars_quadrotor_msgs::msg::PolynomialTrajectory>(cfg_.mpc_cmd_topic, qos);
             path_pub_ = nh_->create_publisher<nav_msgs::msg::Path>("fsm/path", qos);
 
             int cmd_cnt = 0;
@@ -378,6 +379,7 @@ namespace fsm {
             getOnePositionCommand(pid_cmd_, traj_finish_);
             mpc_cmd_pub_->publish(heartbeat);
             cmd_pub_->publish(pid_cmd_);
+
             if (traj_finish_) {
                 cout << GREEN << " -- [Fsm] Traj finish." << RESET << endl;
                 if (closeToGoal(0.1)) {

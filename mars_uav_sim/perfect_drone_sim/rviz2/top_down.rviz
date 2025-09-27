@@ -16,7 +16,7 @@ Panels:
         - /Goal1/Topic1
         - /Yaw_traj1/Topic1
       Splitter Ratio: 0.5
-    Tree Height: 913
+    Tree Height: 365
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -139,8 +139,7 @@ Visualization Manager:
       Enabled: true
       Name: ExpTraj
       Namespaces:
-        exp_traj: true
-        exp_traj_waypoints: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -152,8 +151,7 @@ Visualization Manager:
       Enabled: true
       Name: BackupTraj
       Namespaces:
-        backup_traj: true
-        backup_traj_waypoints: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -193,8 +191,7 @@ Visualization Manager:
       Enabled: true
       Name: Goal
       Namespaces:
-        goal: true
-        goal_line: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -206,7 +203,7 @@ Visualization Manager:
       Enabled: true
       Name: Yaw_traj
       Namespaces:
-        yaw_traj: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -237,7 +234,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/ThirdPersonFollower
-      Distance: 13.521515846252441
+      Distance: 22.9342041015625
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -252,10 +249,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8847967982292175
+      Pitch: 1.479796290397644
       Target Frame: drone
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 3.140392541885376
+      Yaw: 1.7103906869888306
     Saved: ~
 Window Geometry:
   Displays:
