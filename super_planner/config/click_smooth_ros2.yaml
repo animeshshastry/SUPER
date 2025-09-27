@@ -4,7 +4,6 @@ fsm:
   click_height: 1.5
   click_yaw_en: false
   replan_rate: 5.0
-  cmd_vel_topic: "/cmd_vel"
   cmd_topic: "/planning/pos_cmd"
   mpc_cmd_topic: "/planning_cmd/poly_traj"
   timer_en: true
@@ -30,7 +29,7 @@ super_planner:
   sensing_horizon: -1
   receding_dis: 0.0
   robot_r: 0.2
-  yaw_dot_max: 1.0
+  yaw_dot_max: 3.0
   # Yaw mode: 1 heading to velocity, 2 heading to goal
   yaw_mode: 1
   mpc_horizon: 1

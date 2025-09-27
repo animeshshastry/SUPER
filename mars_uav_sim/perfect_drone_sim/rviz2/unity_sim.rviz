@@ -4,20 +4,18 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Sensing1
-        - /Sensing1/LocalCloud1
-        - /Sensing1/LocalCloud1/Topic1
-        - /Sensing1/LocalCloud1/Autocompute Value Bounds1
-        - /Sensing1/GlobalCloud1/Topic1
-        - /Sensing1/GlobalCloud1/Autocompute Value Bounds1
-        - /Robot1/Topic1
+        - /Sensing1/OccupancyGrid1/Topic1
+        - /Sensing1/OccupancyGrid1/Autocompute Value Bounds1
+        - /Sensing1/depth_point_cloud1/Topic1
+        - /Sensing1/depth_point_cloud1/Autocompute Value Bounds1
         - /ExpTraj1/Topic1
         - /BackupTraj1/Topic1
         - /Path1/Topic1
         - /Goal1/Topic1
         - /Yaw_traj1/Topic1
+        - /Odometry1/Shape1
       Splitter Ratio: 0.5
-    Tree Height: 913
+    Tree Height: 365
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -56,9 +54,9 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 4.014019966125488
-            Min Value: -6
-            Value: false
+            Max Value: 9.899999618530273
+            Min Value: 2.5
+            Value: true
           Axis: Z
           Channel Name: intensity
           Class: rviz_default_plugins/PointCloud2
@@ -71,11 +69,11 @@ Visualization Manager:
           Max Intensity: 0
           Min Color: 0; 0; 0
           Min Intensity: 0
-          Name: LocalCloud
+          Name: OccupancyGrid
           Position Transformer: XYZ
           Selectable: false
           Size (Pixels): 3
-          Size (m): 0.05000000074505806
+          Size (m): 0.20000000298023224
           Style: Boxes
           Topic:
             Depth: 5
@@ -97,7 +95,7 @@ Visualization Manager:
           Channel Name: intensity
           Class: rviz_default_plugins/PointCloud2
           Color: 136; 138; 133
-          Color Transformer: FlatColor
+          Color Transformer: AxisColor
           Decay Time: 0
           Enabled: true
           Invert Rainbow: false
@@ -105,37 +103,24 @@ Visualization Manager:
           Max Intensity: 0
           Min Color: 0; 0; 0
           Min Intensity: 0
-          Name: GlobalCloud
+          Name: depth_point_cloud
           Position Transformer: XYZ
           Selectable: false
           Size (Pixels): 1
           Size (m): 0.029999999329447746
-          Style: Squares
+          Style: Points
           Topic:
             Depth: 3
             Durability Policy: Volatile
             Filter size: 10
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /global_pc
+            Value: /quadrotor1/depth_anthing/pointcloud_registered
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
       Enabled: true
       Name: Sensing
-    - Class: rviz_default_plugins/Marker
-      Enabled: true
-      Name: Robot
-      Namespaces:
-        mesh: true
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Best Effort
-        Value: /robot
-      Value: true
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
       Name: ExpTraj
@@ -212,10 +197,49 @@ Visualization Manager:
         Reliability Policy: Best Effort
         Value: /visualization/yaw_traj
       Value: true
+    - Angle Tolerance: 0.10000000149011612
+      Class: rviz_default_plugins/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: true
+      Keep: 1
+      Name: Odometry
+      Position Tolerance: 0.10000000149011612
+      Shape:
+        Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.10000000149011612
+        Color: 255; 25; 0
+        Head Length: 0.30000001192092896
+        Head Radius: 0.10000000149011612
+        Shaft Length: 1
+        Shaft Radius: 0.05000000074505806
+        Value: Arrow
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /quadrotor1/odometry/local
+      Value: true
   Enabled: true
   Global Options:
-    Background Color: 255; 255; 255
-    Fixed Frame: world
+    Background Color: 0; 0; 0
+    Fixed Frame: quadrotor1/odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -235,7 +259,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/ThirdPersonFollower
-      Distance: 20.88572883605957
+      Distance: 4.465847969055176
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -250,24 +274,24 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
-      Target Frame: drone
+      Pitch: 0.36039817333221436
+      Target Frame: quadrotor1/base_link
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 1.5753896236419678
+      Yaw: 3.105400562286377
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: true
-  Height: 1136
+  Height: 1127
   Hide Left Dock: true
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd0000000400000000000002980000041afc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000003b0000041a000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000041afc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003b0000041a000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000004e10000041a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000029800000411fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000003b00000411000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000411fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003b00000411000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000004500000041100000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Tool Properties:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1249
-  X: 671
-  Y: 27
+  Width: 1104
+  X: 70
+  Y: 36

@@ -13,6 +13,9 @@ from launch_ros.actions import Node
 def generate_launch_description():
     super_config_name = 'click_smooth_ros2_depth.yaml'
 
+    package_path = get_package_share_directory('perfect_drone_sim')
+    default_rviz_config_path = os.path.join(package_path, 'rviz2', 'unity_sim.rviz')
+
     ld = LaunchDescription()
 
     SUPER = Node(
@@ -34,19 +37,29 @@ def generate_launch_description():
             ('cmd_vel', '/quadrotor1/cmd_vel'),
         ],
         parameters=[{
+            'kff': 1.0,
             'kp': 0.5,
-            'kd': 0.0,
-            'z_scale': 0.7,
-            'max_cmd_lin_': 2.0,
-            'kp_yaw': 0.1,
-            'kd_yaw': 0.0,
-            'max_yaw_cmd': 0.1,
+            'kd': 0.5,
+            'z_scale': 2.0,
+            'max_pos_err': 10.0,
+            'tolerance': 0.0,
+            'kp_yaw': -1.0,
+            'kff_yaw': -1.0,
+            'max_yaw_cmd': 1.0,
             'odom_in_body_frame': True,
-            'control_rate': 20.0,
+            'control_rate': 30.0,
         }]
+    )
+
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        arguments=['-d', default_rviz_config_path],
+        output='screen'
     )
 
     ld.add_action(SUPER)
     ld.add_action(control)
+    ld.add_action(rviz_node)
 
     return ld

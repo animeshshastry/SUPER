@@ -1,23 +1,23 @@
 fsm:
   click_goal_en: true
   click_goal_topic: "/goal_pose"
-  click_height: 5.0
-  click_yaw_en: false
-  replan_rate: 5.0
+  click_height: 7.0
+  click_yaw_en: true
+  replan_rate: 15.0
   cmd_topic: "/planning/pos_cmd"
   mpc_cmd_topic: "/planning_cmd/poly_traj"
   timer_en: true
   world_frame: "/quadrotor1/odom"
 
 super_planner:
-  backup_traj_en: true
+  backup_traj_en: false
   detailed_log_en: false
   visualization_en: true
   use_fov_cut: true
   print_log: false
   visual_process: false
   frontend_in_known_free: false
-  goal_yaw_en: false
+  goal_yaw_en: true
   goal_vel_en: false
   corridor_bound_dis: 1.0
   corridor_line_max_length: 5.2
@@ -25,11 +25,11 @@ super_planner:
   iris_iter_num: 2
   obs_skip_num: 2
   replan_forward_dt: 0.1
-  planning_horizon: 7.0
+  planning_horizon: 10.0
   sensing_horizon: -1
   receding_dis: 5.0
   robot_r: 0.2
-  yaw_dot_max: 3.0
+  yaw_dot_max: 2.0
   # Yaw mode: 1 heading to velocity, 2 heading to goal
   yaw_mode: 1
   mpc_horizon: 15
@@ -41,7 +41,7 @@ traj_opt:
 
   boundary:
     max_vel: 5.0
-    max_acc: 6.0
+    max_acc: 2.0
     max_jerk: 80.0
     max_omg: 2.0
     max_acc_thr: 10.0
@@ -106,12 +106,12 @@ astar:
 
 
 rog_map:
-  resolution: 0.3
-  inflation_resolution: 0.3
-  inflation_step: 1
+  resolution: 0.2
+  inflation_resolution: 0.2
+  inflation_step: 3
   unk_inflation_en: false
   unk_inflation_step: 1
-  map_size: [ 100,100,10 ]
+  map_size: [ 50,50,10 ]
   # If the map rolling is disable, the map origin [m] should be set.
   fix_map_origin: [ 0,0,1.5 ]
   frontier_extraction_en: false
@@ -138,7 +138,7 @@ rog_map:
   ros_callback:
     enable: true
     cloud_topic: "/quadrotor1/depth_anthing/pointcloud_registered"
-    odom_topic: "/quadrotor1/synced_odom"
+    odom_topic: "/quadrotor1/odometry/local"
     odom_timeout: 2.0
 
 

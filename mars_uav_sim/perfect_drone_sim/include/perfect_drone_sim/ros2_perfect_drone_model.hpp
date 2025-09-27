@@ -62,7 +62,7 @@ namespace perfect_drone {
                                           .best_effort()
                                           .keep_last(100)
                                           .durability_volatile());
-            // const rclcpp::QoS qos(rclcpp::QoS(100).reliable().keep_last(100).durability_volatile());
+            const rclcpp::QoS qos_reliable(rclcpp::QoS(10).reliable().keep_last(10).durability_volatile());
 
 #define CONFIG_FILE_DIR(name) (std::string(std::string(ROOT_DIR) + "config/"+(name)))
             std::string dft_cfg_path = CONFIG_FILE_DIR("lidar_sim.yaml");
@@ -124,14 +124,14 @@ namespace perfect_drone {
 
             odom_timer_cbk_group = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
             odom_pub_timer_ = this->create_wall_timer(
-                    std::chrono::milliseconds(10),
+                    std::chrono::milliseconds(20),
                     std::bind(&PerfectDrone::publishOdom, this),
                     odom_timer_cbk_group
             );
 
             global_pc_pub_cbk_group = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
             global_pc_pub_timer_ = this->create_wall_timer(
-                    std::chrono::milliseconds(1),
+                    std::chrono::milliseconds(10),
                     std::bind(&PerfectDrone::publishGlobalPC, this),
                     global_pc_pub_cbk_group
             );
