@@ -35,20 +35,36 @@ def generate_launch_description():
             ('setpoint', '/planning/pos_cmd'),
             ('odom', '/quadrotor1/odometry/local'),
             ('cmd_vel', '/quadrotor1/cmd_vel'),
+            ('cmd_accel', '/quadrotor1/cmd_accel'),
         ],
         parameters=[{
+            'control_accel': True,
             'kff': 1.0,
-            'kp': 0.5,
-            'kd': 0.5,
+            'kp': 1.0,
+            'kd': 1.0,
             'z_scale': 2.0,
-            'max_pos_err': 10.0,
+            'max_pos_err': 100.0,
             'tolerance': 0.0,
-            'kp_yaw': -1.0,
-            'kff_yaw': -1.0,
+            'kp_yaw': 1.0,
+            'kff_yaw': 1.0,
             'max_yaw_cmd': 1.0,
             'odom_in_body_frame': True,
             'control_rate': 30.0,
         }]
+        # parameters=[{
+        #     'control_accel': False,
+        #     'kff': 1.0,
+        #     'kp': 0.5,
+        #     'kd': 0.5,
+        #     'z_scale': 2.0,
+        #     'max_pos_err': 10.0,
+        #     'tolerance': 0.1,
+        #     'kp_yaw': 1.0,
+        #     'kff_yaw': 1.0,
+        #     'max_yaw_cmd': 1.0,
+        #     'odom_in_body_frame': True,
+        #     'control_rate': 30.0,
+        # }]
     )
 
     rviz_node = Node(
